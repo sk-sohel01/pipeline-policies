@@ -1,7 +1,7 @@
 def call(String repoName) {
     def rawURL = 'https://raw.githubusercontent.com/sk-sohel01/pipeline-policies/main/sonar-skip-repos/list.txt'
     try {
-        def skipList = new URL(rawURL).text.readLines()*.trim()
+        def skipList = new URL(rawURL).text.readLines().collect { it.trim() }
         def shouldSkip = skipList.contains(repoName)
         echo shouldSkip 
             ? "✅ Skipping SonarQube for whitelisted repo: ${repoName}" 
@@ -10,5 +10,5 @@ def call(String repoName) {
     } catch (Exception e) {
         echo "⚠️ Could not load skip list: ${e.message}"
         return false
-    }
+    
 }
