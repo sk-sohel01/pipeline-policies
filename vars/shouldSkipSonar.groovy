@@ -10,5 +10,5 @@ def call(String repoName) {
     } catch (Exception e) {
         echo "⚠️ Could not load skip list: ${e.message}"
         return false
-    
+    }
 }
